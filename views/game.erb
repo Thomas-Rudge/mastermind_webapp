@@ -1,0 +1,33 @@
+
+<html>
+  <head>
+    <link rel="stylesheet" href="<%= url("/style.css")%>"/>
+  </head>
+  <body>
+    <div class=mastermind_container>
+      <%= table %>
+    </div>
+    <div class=form_container>
+      <% if state == 1 %>
+        <p>WINNER!</p>
+        <form class=win_form>
+          <input type='hidden' name='replay' value='true'/>
+          <input type='submit' value='Replay?'/>
+        </form>
+      <% elsif state == 0 %>
+        <p>Sorry, you lose.</p>
+        <form class=lose_form>
+          <input type='hidden' name='replay' value='true'/>
+          <input type='submit' value='Replay?'/>
+        </form>
+      <% else %>
+        <p>Make a guess!</p>
+        <form class=guess_form>
+          <input type='text' name='guess'/>
+          <input type='submit' value='Guess'/>
+        </form>
+      <% end %>
+    </div>
+  </body>
+</html>
+
