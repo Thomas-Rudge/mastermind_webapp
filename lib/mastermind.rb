@@ -2,25 +2,32 @@ require_relative 'AI'
 
 class MastermindGame
 
-  PERMUTATIONS = [:r, :g, :o, :b, :p, :t].repeated_permutation(4).to_a
+  PERMUTATIONS = [:r, :g, :o, :b, :p, :y].repeated_permutation(4).to_a
+  attr_reader :guesses, :hint_pegs
 
   def initialize
+    @ai = AI.new
+    reset
+  end
+
+  def reset
     @guesses   = Array.new(12).map! { |x| x=Array.new(4) {""} }
     @code      = new_code
     @hint_pegs = Array.new # Not nil because array method applied before first play
-    @ai        = AI.new
   end
 
   def generate_mastermind_table
     table = "<div class=table>"
     @guesses.each do |guess|
       table += "<div class=row>"
-      guess.each { |square| table += "<div class=#{square}cell></div>" }
+      guess.each { |square| table += "<div class='#{square}cell cell'></div>" }
 
       pegs = key_peg_generator(guess)
-      table += "<div class=pegs_container>"
-      pegs.each { |peg| table += "<div class=#{peg}peg></div>" }
-      table += "</div></div>"
+      table += "<div class=pegs_container><div class=pegrow>"
+      pegs[0..1].each { |peg| table += "<div class='#{peg}peg peg'></div>" }
+      table += "</div><div class=pegrow>"
+      pegs[2..4].each { |peg| table += "<div class='#{peg}peg peg'></div>" }
+      table += "</div></div></div>"
     end
 
     table += "</div>"

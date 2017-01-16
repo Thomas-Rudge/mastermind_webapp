@@ -1,0 +1,72 @@
+body {
+  background-color: #2D2E2E;
+}
+
+.mastermind_container {
+  width: 217px;
+  display: block;
+  margin: 10px auto;
+}
+
+.table {
+  display: table;
+}
+
+.row {
+  display: table-row;
+}
+
+.pegs_container {
+  display: table;
+}
+
+.pegrow {
+  display: table-row;
+}
+
+.cell {
+   width: 41px;
+   height: 41px;
+   border: 1px solid #4D4C4B;
+   display: table-cell;
+}
+
+.ocell {
+  background-color: #CD7629;
+}
+
+.bcell {
+  background-color: #27458A;
+}
+
+.ycell {
+  background-color: #CDCA29;
+}
+
+.gcell {
+  background-color: #209F30;
+}
+
+.rcell {
+  background-color: #CD3129;
+}
+
+.pcell {
+  background-color: #60228A;
+}
+
+.peg {
+  background-color: #5A5957;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #4D4C4B;
+  display: table-cell;
+}
+
+.blpeg {
+  background-color: #000000;
+}
+
+.wpeg {
+  background-color: #FDFDFD;
+}

@@ -10,7 +10,7 @@ get "/" do
 end
 
 get "/play" do
-  redirect "/" if params[:replay] == "true"
+  @@game.reset if params[:replay] == "true"
 
   guess = params[:guess]
   guess = @@game.format_player_response(guess)
@@ -19,14 +19,14 @@ get "/play" do
     @@game.register_player_response(guess) if @@game.check_player_response(guess)
   end
 
-  state = @@game.check_game_status
   table = @@game.generate_mastermind_table
-  puts "State #{state}"
+  state = @@game.check_game_status
+
   erb :game, :locals=>{:table=>table, :state=>state}
 end
 
 get "/robot" do
-  redirect "/" if params[:replay] == "true"
+  @@game.reset if params[:replay] == "true"
 
   guess = @@game.get_ai_response
   @@game.register_player_response(guess)
