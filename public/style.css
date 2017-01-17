@@ -17,7 +17,7 @@ p {
   margin: 10px auto;
 }
 
-#guess_form {
+#guess_form, #guess_data {
   visibility: hidden;
   position: absolute;
 }

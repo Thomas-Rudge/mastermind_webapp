@@ -11,16 +11,8 @@
       <div class=form_container>
         <% if state == 1 %>
           <p>WINNER!</p>
-          <form class=win_form>
-            <input type='hidden' name='replay' value='true'/>
-            <input type='submit' value='Replay?'/>
-          </form>
         <% elsif state == 0 %>
           <p>Sorry, you lose.</p>
-          <form class=lose_form>
-            <input type='hidden' name='replay' value='true'/>
-            <input type='submit' value='Replay?'/>
-          </form>
         <% elsif !ai %>
           <p>Make a guess!</p>
           <div class=table>
@@ -42,7 +34,11 @@
             <input type='submit' name='submit' value='Guess'/>
           </form>
         <% else %>
-          <p id=guess_form><%= guess %></p>
+          <p id=guess_data><%= guess %></p>
+          <form id=guess_form>
+            <input type='text' name='guess' value=''/>
+            <input type='submit' name='submit' value='Guess'/>
+          </form>
         <% end %>
         <div class='table button_container'>
           <div id=retry>
