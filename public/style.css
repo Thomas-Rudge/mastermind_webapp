@@ -2,10 +2,41 @@ body {
   background-color: #2D2E2E;
 }
 
-.mastermind_container {
+p {
+  font-family: Verdana, Arial, sans-serif;
+  text-align: center;
+  font-size: 12px;
+  color: #FDFDFD;
+  padding: 0;
+  margin: 2px;
+}
+
+#mastermind_container {
   width: 217px;
   display: block;
   margin: 10px auto;
+}
+
+#guess_form {
+  visibility: hidden;
+  position: absolute;
+}
+
+#retry, #home {
+  width: 50px;
+  height: 30px;
+  font-family: Verdana, Arial, sans-serif;
+  color: #FDFDFD;
+  background-color: #323333;
+  border: 1px groove #B1B3B3;
+  cursor: pointer;
+  display: table-cell;
+  padding: 5px 0 0 0;
+}
+
+#retry:hover, #home:hover {
+  background-color: #1C1C1C;
+  border-color: #697575;
 }
 
 .table {
@@ -16,19 +47,31 @@ body {
   display: table-row;
 }
 
-.pegs_container {
-  display: table;
+.cell {
+  display: table-cell;
 }
-
-.pegrow {
+/* jQuery will use the next two classes to find the next cell for input.
+ * DO NOT DELETE
+ * */
+.xrow {
   display: table-row;
 }
 
-.cell {
+.xcell {
+  display: table-cell;
+}
+
+.game_cell {
    width: 41px;
    height: 41px;
    border: 1px solid #4D4C4B;
-   display: table-cell;
+}
+
+.input_cell {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #4D4C4B;
+  cursor: pointer;
 }
 
 .ocell {
@@ -55,12 +98,35 @@ body {
   background-color: #60228A;
 }
 
+.iocell:hover {
+  background-color: #E09451;
+}
+
+.ibcell:hover {
+  background-color: #647BB0;
+}
+
+.iycell:hover {
+  background-color: #FFFD84;
+}
+
+.igcell:hover {
+  background-color: #68C974;
+}
+
+.ircell:hover {
+  background-color: #FF8A84;
+}
+
+.ipcell:hover {
+  background-color: #8E60B0;
+}
+
 .peg {
   background-color: #5A5957;
   width: 20px;
   height: 20px;
   border: 1px solid #4D4C4B;
-  display: table-cell;
 }
 
 .blpeg {
@@ -69,4 +135,9 @@ body {
 
 .wpeg {
   background-color: #FDFDFD;
+}
+
+.button_container {
+  width: 104px;
+  margin: 10px auto;
 }

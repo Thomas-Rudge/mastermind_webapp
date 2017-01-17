@@ -2,9 +2,11 @@
 <html>
   <head>
     <link rel="stylesheet" href="<%= url("/style.css")%>"/>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="<%= url("/script.js")%>"></script>
   </head>
   <body>
-    <div class=mastermind_container>
+    <div id=mastermind_container>
       <%= table %>
       <div class=form_container>
         <% if state == 1 %>
@@ -19,13 +21,37 @@
             <input type='hidden' name='replay' value='true'/>
             <input type='submit' value='Replay?'/>
           </form>
-        <% else %>
+        <% elsif !ai %>
           <p>Make a guess!</p>
-          <form class=guess_form>
-            <input type='text' name='guess' autofocus/>
-            <input type='submit' value='Guess'/>
+          <div class=table>
+            <div id=select_red class='cell rcell input_cell ircell'>
+            </div>
+            <div id=select_orange class='cell ocell input_cell iocell'>
+            </div>
+            <div id=select_yellow class='cell ycell input_cell iycell'>
+            </div>
+            <div id=select_green class='cell gcell input_cell igcell'>
+            </div>
+            <div id=select_blue class='cell bcell input_cell ibcell'>
+            </div>
+            <div id=select_purple class='cell pcell input_cell ipcell'>
+            </div>
+          </div>
+          <form id=guess_form>
+            <input type='text' name='guess' value=''/>
+            <input type='submit' name='submit' value='Guess'/>
           </form>
+        <% else %>
+          <p id=guess_form><%= guess %></p>
         <% end %>
+        <div class='table button_container'>
+          <div id=retry>
+            <p>RETRY</p>
+          </div>
+          <div id=home>
+            <p>HOME</p>
+          </div>
+        </div>
       </div>
     </div>
   </body>

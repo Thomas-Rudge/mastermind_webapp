@@ -3,7 +3,7 @@ require_relative 'AI'
 class MastermindGame
 
   PERMUTATIONS = [:r, :g, :o, :b, :p, :y].repeated_permutation(4).to_a
-  attr_reader :guesses, :hint_pegs
+  attr_reader :guesses
 
   def initialize
     @ai = AI.new
@@ -17,16 +17,19 @@ class MastermindGame
   end
 
   def generate_mastermind_table
-    table = "<div class=table>"
+    table = "<div id=mastermind_table class=table>"
     @guesses.each do |guess|
-      table += "<div class=row>"
-      guess.each { |square| table += "<div class='#{square}cell cell'></div>" }
+      table += guess[0].empty? ? "<div class=row>" : "<div class=xrow>"
+      guess.each do |square|
+        table += square.empty? ? "<div class='cell game_cell'></div>"
+                               : "<div class='#{square}cell xcell game_cell'></div>"
+      end
 
       pegs = key_peg_generator(guess)
-      table += "<div class=pegs_container><div class=pegrow>"
-      pegs[0..1].each { |peg| table += "<div class='#{peg}peg peg'></div>" }
-      table += "</div><div class=pegrow>"
-      pegs[2..4].each { |peg| table += "<div class='#{peg}peg peg'></div>" }
+      table += "<div class=table><div class=row>"
+      pegs[0..1].each { |peg| table += "<div class='#{peg}peg xcell peg'></div>" }
+      table += "</div><div class=row>"
+      pegs[2..4].each { |peg| table += "<div class='#{peg}peg xcell peg'></div>" }
       table += "</div></div></div>"
     end
 

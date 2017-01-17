@@ -15,23 +15,26 @@ get "/play" do
   guess = params[:guess]
   guess = @@game.format_player_response(guess)
 
-  unless guess.nil? || guess.empty?
+  unless guess.nil? || guess.empty? || (@@game.guesses.include? guess)
     @@game.register_player_response(guess) if @@game.check_player_response(guess)
   end
 
   table = @@game.generate_mastermind_table
   state = @@game.check_game_status
 
-  erb :game, :locals=>{:table=>table, :state=>state}
+  erb :game, :locals=>{:table=>table, :state=>state, :ai=>false}
 end
 
-get "/robot" do
+get "/ai" do
   @@game.reset if params[:replay] == "true"
 
   guess = @@game.get_ai_response
+  puts "#{guess}"
+
   @@game.register_player_response(guess)
   state = @@game.check_game_status
   table = @@game.generate_mastermind_table
 
-  erb :game, :locals=>{:table=>table, :state=>state}
+
+  erb :game, :locals=>{:table=>table, :state=>state, :ai=>true, :guess=>guess.join}
 end
