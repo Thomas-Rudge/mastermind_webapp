@@ -2,13 +2,36 @@
 <html>
   <head>
     <link rel="stylesheet" href="<%= url("/style.css")%>"/>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="<%= url("/script.js")%>"></script>
   </head>
   <body>
-    <div class=game_option>
-      <a class=contact_link href="/play">Codebreaker</a>
+    <div id=option_container class=table>
+    <pre class=title>
+                      _
+  _ __ ___   __ _ ___| |_ ___ _ __
+ | '_ ` _ \ / _` / __| __/ _ \ '__|
+ | | | | | | (_| \__ \ ||  __/ |
+ |_| |_| |_|\__,_|___/\__\___|_|
+               _           _
+     _ __ ___ (_)_ __   __| |
+    | '_ ` _ \| | '_ \ / _` |
+    | | | | | | | | | | (_| |
+    |_| |_| |_|_|_| |_|\__,_|
+    </pre>
+    <div class='game_option row'>
+      <a href="/play?replay=true">Codebreaker</a>
     </div>
-    <div class=game_option>
-      <a class=contact_link href="/ai">Codemaker</a>
+    <div class='game_option row'>
+      <a id=codemaker_button>Codemaker</a>
+    </div>
+    <form id=codemaker>
+      <input id=code_input type='text' name='code' value=''/>
+    </form>
+    <div id=code_tip>
+      Decide which code the AI has to break, by adding your own code in the input box.<br />
+      The code can only contain the characters o, b, p, r, b, g; and must be four characters
+      long (e.g. rrrr, pogo, bpgo). If left blank a random code will be chosen.
     </div>
   </body>
 </html>

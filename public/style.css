@@ -17,11 +17,6 @@ p {
   margin: 10px auto;
 }
 
-#guess_form, #guess_data {
-  visibility: hidden;
-  position: absolute;
-}
-
 #retry, #home {
   width: 50px;
   height: 30px;
@@ -37,6 +32,66 @@ p {
 #retry:hover, #home:hover {
   background-color: #1C1C1C;
   border-color: #697575;
+}
+
+#code_input {
+  width: 100px;
+  text-align: center;
+  margin: 2px auto;
+  display: block;
+  background-color: #323333;
+  color: #FDFDFD;
+  font-family: Verdana, Arial, sans-serif;
+}
+
+#code_tip {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+  text-align: justify;
+  color: #FDFDFD;
+  background-color: #3B3B3B;
+  padding: 3px;
+  display: none;
+}
+
+#option_container {
+  width: 170px;
+  margin: 20px auto;
+}
+
+.title {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 8px;
+  color: #FDFDFD;
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+
+.game_option {
+  font-family: Verdana, Arial, sans-serif;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #FDFDFD;
+  height: 40px;
+  width: 170px;
+  margin: 20px 0;
+  cursor: pointer;
+}
+
+.game_option:hover {
+  background-color: #4B4D4D;
+}
+
+.game_option a{
+  text-decoration: none;
+  padding-top: 7px;
+  display: block;
+}
+
+.game_option a:visited {
+  color: #FDFDFD;
+  text-decoration: none;
 }
 
 .table {
@@ -140,4 +195,13 @@ p {
 .button_container {
   width: 104px;
   margin: 10px auto;
+}
+
+.hidden {
+  visibility: hidden;
+  position: absolute;
+}
+
+.removable {
+  cursor: pointer;
 }

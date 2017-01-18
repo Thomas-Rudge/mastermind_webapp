@@ -3,7 +3,8 @@ require_relative 'AI'
 class MastermindGame
 
   PERMUTATIONS = [:r, :g, :o, :b, :p, :y].repeated_permutation(4).to_a
-  attr_reader :guesses
+
+  attr_reader :guesses, :code, :ai
 
   def initialize
     @ai = AI.new
@@ -13,7 +14,8 @@ class MastermindGame
   def reset
     @guesses   = Array.new(12).map! { |x| x=Array.new(4) {""} }
     @code      = new_code
-    @hint_pegs = Array.new # Not nil because array method applied before first play
+    @hint_pegs = Array.new
+    @ai.reset
   end
 
   def generate_mastermind_table
@@ -34,15 +36,6 @@ class MastermindGame
     end
 
     table += "</div>"
-  end
-
-  def title
-    %Q{___  ___ ___  _____ _____ ______________  ________ _   _______
-    |  \\/  |/ _ \\/  ___|_   _|  ___| ___ \\  \\/  |_   _| \\ | |  _  \\
-    | .  . / /_\\ \\ `--.  | | | |__ | |_/ / .  . | | | |  \\| | | | |
-    | |\\/| |  _  |`--. \\ | | |  __||    /| |\\/| | | | | . ` | | | |
-    | |  | | | | /\\__/ / | | | |___| |\\ \\| |  | |_| |_| |\\  | |/ /
-    \\_|  |_|_| |_|____/  \\_/ \\____/\\_| \\_\\_|  |_/\\___/\\_| \\_/___/}
   end
 
   def key_peg_generator(_guess)
@@ -101,5 +94,18 @@ class MastermindGame
 
   def new_code
     PERMUTATIONS.sample
+  end
+
+  def code=(value)
+    if (value.is_a? String) && value.length == 4
+      value = format_player_response(value)
+
+      if PERMUTATIONS.include? value
+        @code = value
+        return
+      end
+    end
+
+    @code = new_code
   end
 end

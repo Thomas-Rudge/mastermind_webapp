@@ -1,9 +1,24 @@
 require 'sinatra'
-require 'sinatra/reloader'
-#require_relative 'lib/mastermind'
-load '/home/thomas/GitHub/mastermind_webapp/lib/mastermind.rb'
+#require 'sinatra/reloader'
+require_relative 'lib/mastermind'
 
 @@game = MastermindGame.new
+
+def game_returnables
+  a = @@game.generate_mastermind_table
+  b = @@game.check_game_status
+  c = b == 0 ? @@game.code : ""
+
+  [a, b, c]
+end
+
+def register_guess(guess)
+  unless guess.nil? || guess.empty?
+    @@game.register_player_response(guess)
+  end
+end
+
+################
 
 get "/" do
   erb :index
@@ -15,14 +30,11 @@ get "/play" do
   guess = params[:guess]
   guess = @@game.format_player_response(guess)
 
-  unless guess.nil? || guess.empty? || (@@game.guesses.include? guess)
-    @@game.register_player_response(guess) if @@game.check_player_response(guess)
-  end
+  register_guess(guess)
 
-  table = @@game.generate_mastermind_table
-  state = @@game.check_game_status
+  table, state, code = game_returnables
 
-  erb :game, :locals=>{:table=>table, :state=>state, :ai=>false}
+  erb :game, :locals=>{:table=>table, :state=>state, :ai=>false, :guess=>'', :code=>code}
 end
 
 get "/ai" do
@@ -31,15 +43,14 @@ get "/ai" do
   guess = params[:guess]
   guess = @@game.format_player_response(guess)
 
-  unless guess.nil? || guess.empty? || (@@game.guesses.include? guess)
-    @@game.register_player_response(guess)
-    sleep(1)
-  end
+  user_code   = params[:usercode]
+  @@game.code = user_code if !(['x', nil].include? user_code) && guess.nil?
 
-  table = @@game.generate_mastermind_table
-  state = @@game.check_game_status
+  register_guess(guess)
 
-  guess = @@game.get_ai_response
+  table, state, code = game_returnables
 
-  erb :game, :locals=>{:table=>table, :state=>state, :ai=>true, :guess=>guess.join}
+  guess = @@game.get_ai_response.join if state.nil?
+
+  erb :game, :locals=>{:table=>table, :state=>state, :ai=>true, :guess=>guess, :code=>code}
 end

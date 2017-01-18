@@ -12,7 +12,7 @@
         <% if state == 1 %>
           <p>WINNER!</p>
         <% elsif state == 0 %>
-          <p>Sorry, you lose.</p>
+          <p>Sorry, you lose.<br />The code was <%= code %>.</p>
         <% elsif !ai %>
           <p>Make a guess!</p>
           <div class=table>
@@ -29,13 +29,28 @@
             <div id=select_purple class='cell pcell input_cell ipcell'>
             </div>
           </div>
-          <form id=guess_form>
+          <p id=guess_data><%= guess %></p>
+          <form id=guess_form class=hidden>
             <input type='text' name='guess' value=''/>
             <input type='submit' name='submit' value='Guess'/>
           </form>
         <% else %>
-          <p id=guess_data><%= guess %></p>
-          <form id=guess_form>
+          <div class=hidden>
+            <div id=select_red class='cell rcell input_cell ircell'>
+            </div>
+            <div id=select_orange class='cell ocell input_cell iocell'>
+            </div>
+            <div id=select_yellow class='cell ycell input_cell iycell'>
+            </div>
+            <div id=select_green class='cell gcell input_cell igcell'>
+            </div>
+            <div id=select_blue class='cell bcell input_cell ibcell'>
+            </div>
+            <div id=select_purple class='cell pcell input_cell ipcell'>
+            </div>
+          </div>
+          <p id=guess_data class=hidden><%= guess %></p>
+          <form id=guess_form class=hidden>
             <input type='text' name='guess' value=''/>
             <input type='submit' name='submit' value='Guess'/>
           </form>
