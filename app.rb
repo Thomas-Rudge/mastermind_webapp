@@ -7,7 +7,7 @@ require_relative 'lib/mastermind'
 def game_returnables
   a = @@game.generate_mastermind_table
   b = @@game.check_game_status
-  c = b == 0 ? @@game.code : ""
+  c = b == 0 ? @@game.code.join : ""
 
   [a, b, c]
 end

@@ -87,6 +87,7 @@ p {
   text-decoration: none;
   padding-top: 7px;
   display: block;
+  color: #FDFDFD;
 }
 
 .game_option a:visited {
