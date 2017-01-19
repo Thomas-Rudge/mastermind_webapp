@@ -23,15 +23,15 @@ class MastermindGame
     @guesses.each do |guess|
       table += guess[0].empty? ? "<div class=row>" : "<div class=xrow>"
       guess.each do |square|
-        table += square.empty? ? "<div class='cell game_cell'></div>"
-                               : "<div class='#{square}cell xcell game_cell'></div>"
+        table += square.empty? ? "<div class='cell game_cell'>&nbsp;</div>"
+                               : "<div class='#{square}cell xcell game_cell'>&nbsp;</div>"
       end
 
       pegs = key_peg_generator(guess)
       table += "<div class=table><div class=row>"
-      pegs[0..1].each { |peg| table += "<div class='#{peg}peg xcell peg'></div>" }
+      pegs[0..1].each { |peg| table += "<div class='#{peg}peg xcell peg'>&nbsp;</div>" }
       table += "</div><div class=row>"
-      pegs[2..4].each { |peg| table += "<div class='#{peg}peg xcell peg'></div>" }
+      pegs[2..4].each { |peg| table += "<div class='#{peg}peg xcell peg'>&nbsp;</div>" }
       table += "</div></div></div>"
     end
 
