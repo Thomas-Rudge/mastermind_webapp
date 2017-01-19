@@ -51,7 +51,7 @@ p {
 
 #code_tip {
   font-family: Verdana, Arial, sans-serif;
-  font-size: 9pt;
+  font-size: 10pt;
   text-align: justify;
   color: #FDFDFD;
   background-color: #3B3B3B;
@@ -60,13 +60,13 @@ p {
 }
 
 #option_container {
-  width: 170px;
+  width: 300px;
   margin: 20px auto;
 }
 
 .title {
   font-family: "Courier New", Courier, monospace;
-  font-size: 8pt;
+  font-size: 11pt;
   color: #FDFDFD;
   font-weight: bold;
   padding-bottom: 20px;
@@ -75,12 +75,12 @@ p {
 .game_option {
   font-family: Verdana, Arial, sans-serif;
   text-align: center;
-  font-size: 13pt;
+  font-size: 20pt;
   font-weight: bold;
+  line-height: 1.5;
   color: #FDFDFD;
-  height: 40px;
-  width: 170px;
-  margin: 20px 0;
+  height: 60px;
+  width: 300px;
   cursor: pointer;
 }
 

@@ -18,6 +18,41 @@ def register_guess(guess)
   end
 end
 
+def generate_css(resolution)
+  resolution = resolution.split(":").map { |x| x.to_i }
+
+  cellxy, pegxy, inputxy, table_width = get_css_dimensions(resolution)
+  css = dynamic_css(cellxy, pegxy, inputxy, table_width)
+
+  filename = File.expand_path('dynamic.css', settings.public_dir)
+  File.open(filename, "w") { |file| file.write(css) }
+end
+
+def get_css_dimensions(resolution)
+  cellxy  = resolution[1] / 15
+  pegxy   = (cellxy -1) / 2
+  inputxy = (cellxy / 1.16).round
+
+  table_width = (cellxy * 4) + (pegxy * 2) + 12;
+
+  cellxy      = cellxy.to_s + "px"
+  pegxy       = pegxy.to_s + "px"
+  inputxy     = inputxy.to_s + "px"
+  table_width = table_width.to_s + "px"
+
+  [cellxy, pegxy, inputxy, table_width]
+end
+
+def dynamic_css(cellxy, pegxy, inputxy, table_width)
+  %Q{
+#mastermind_container{width:#{table_width}}
+.button_container{width:#{table_width}}
+.game_cell{width:#{cellxy}; height: #{cellxy}}
+.peg{width:#{pegxy};height: #{pegxy}}
+.input_cell{width:#{inputxy};height: #{inputxy}}
+  }
+end
+
 ################
 
 get "/" do
@@ -26,6 +61,10 @@ end
 
 get "/play" do
   @@game.reset if params[:replay] == "true"
+
+  res = params[:res]
+  puts res.nil?
+  generate_css(res) unless res.nil?
 
   guess = params[:guess]
   guess = @@game.format_player_response(guess)
@@ -39,6 +78,9 @@ end
 
 get "/ai" do
   @@game.reset if params[:replay] == "true"
+
+  res = params[:res]
+  generate_css(res) unless res.nil?
 
   guess = params[:guess]
   guess = @@game.format_player_response(guess)

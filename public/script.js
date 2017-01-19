@@ -31,40 +31,18 @@ $(document).ready(function() {
   };
 
   var getAvailableResolution = function() {
-    return [$(window).width(), $(window).height()];
-  };
-
-  var setBoardSize = function() {
-    var res = getAvailableResolution();
-
-    var cellxy  = res[1] / 15;
-    var pegxy   = Math.round((cellxy - 1) / 2);
-    var inputxy = Math.round(cellxy / 1.16);
-    cellxy  = Math.round(cellxy);
-
-    var table_width = (cellxy * 4) + (pegxy * 2) + 12;
-
-    cellxy      = cellxy.toString() + 'px';
-    pegxy       = pegxy.toString() + 'px';
-    inputxy     = inputxy.toString() + 'px';
-    table_width = table_width.toString() + 'px';
-
-    $('#mastermind_container').css('width', table_width);
-    $('.button_container').css('width', table_width);
-    $('.game_cell').css( {'width': cellxy, 'height': cellxy} );
-    $('.peg').css( {'width': pegxy, 'height': pegxy} );
-    $('.input_cell').css( {'width': inputxy, 'height': inputxy} );
+    return $(window).width().toString() + ':' + $(window).height().toString();
   };
 
   var startCodebreaker = function() {
-    user_uri = '/play?replay=true';
+    user_uri = '/play?replay=true&res=' + getAvailableResolution();
     window.location.href = user_uri;
   };
 
   var startCodemaker = function() {
     user_code = $('#code_input').val();
     if (user_code === '') { user_code = 'x' };
-    ai_uri = '/ai?replay=true&usercode=' + user_code;
+    ai_uri = '/ai?replay=true&usercode=' + user_code + '&res=' + getAvailableResolution()
     window.location.href = ai_uri;
   };
 
@@ -107,8 +85,6 @@ $(document).ready(function() {
   };
 
   if (window.location.pathname === '/ai' && $('#guess_data') !== null) {
-    setBoardSize();
-
     aiGuess = $('#guess_data').text();
 
     setTimeout(function(){
@@ -116,7 +92,5 @@ $(document).ready(function() {
         updateBoard(c);
       };
     }, 1200);
-  } else if (window.location.pathname === '/play') {
-    setBoardSize();
   };
 });
