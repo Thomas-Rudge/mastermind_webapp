@@ -2,6 +2,11 @@ require 'sinatra'
 #require 'sinatra/reloader'
 require_relative 'lib/mastermind'
 
+configure :production do
+  set :host, 'toms-mastermind.herokuapp.com'
+  set :force_ssl, false # It's just a game
+end
+
 @@game = MastermindGame.new
 
 def game_returnables
