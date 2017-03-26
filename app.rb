@@ -5,7 +5,7 @@ require_relative 'lib/mastermind'
 configure :production do
   set :host, 'toms-mastermind.herokuapp.com'
   set :force_ssl, false # It's just a game
-  #set :protection, :except => :frame_options
+  set :protection, :except => :frame_options
 end
 
 @@game = MastermindGame.new
@@ -62,7 +62,6 @@ end
 ################
 
 get "/" do
-  response['Access-Control-Allow-Origin'] = 'http://www.thomasrudge.co.uk/html/software.html'
   erb :index
 end
 
