@@ -62,7 +62,7 @@ end
 ################
 
 get "/" do
-  response['Access-Control-Allow-Origin'] = 'http://www.thomasrudge.co.uk/'
+  response['Access-Control-Allow-Origin'] = 'http://www.thomasrudge.co.uk/html/software.html'
   erb :index
 end
 
